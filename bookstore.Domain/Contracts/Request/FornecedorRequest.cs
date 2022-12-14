@@ -1,5 +1,4 @@
 ﻿
-using bookstore.Domain.Entities;
 using bookstore.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
