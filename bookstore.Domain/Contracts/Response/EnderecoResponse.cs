@@ -1,7 +1,7 @@
 ﻿
-namespace bookstore.Domain.Entities
+namespace bookstore.Domain.Contracts.Response
 {
-    public class Endereco : Entity
+    public class EnderecoResponse : BaseResponse
     {
         public string Logradouro { get; set; }
         public string Numero { get; set; }
