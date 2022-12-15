@@ -8,5 +8,7 @@ namespace bookstore.Domain.Entities
         //Relacionamento
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
+
+        public ICollection<LivroAvaliacao> LivroAvaliacoes { get; set; }
     }
 }
