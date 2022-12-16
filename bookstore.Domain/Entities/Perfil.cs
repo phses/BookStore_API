@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace bookstore.Domain.Entities
 {
-    public class Perfil
+    public class Perfil : Entity
     {
         public string Nome { get; set; }
 
