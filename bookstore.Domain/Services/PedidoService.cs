@@ -1,4 +1,5 @@
 ﻿using bookstore.Domain.Entities;
+using bookstore.Domain.Interfaces;
 using bookstore.Domain.Interfaces.Repositories;
 using bookstore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,7 @@ namespace bookstore.Domain.Services
 
         private readonly IPedidoRepository _pedidoRepository;
 
-        public PedidoService(IPedidoRepository pedidoRepository, IHttpContextAccessor httpContextAccessor) : base(pedidoRepository, httpContextAccessor)
+        public PedidoService(IPedidoRepository pedidoRepository, INotificador notificador, IHttpContextAccessor httpContextAccessor) : base(pedidoRepository, notificador, httpContextAccessor)
         {
         }
     }

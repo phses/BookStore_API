@@ -1,4 +1,5 @@
 ﻿using bookstore.Domain.Entities;
+using bookstore.Domain.Interfaces;
 using bookstore.Domain.Interfaces.Repositories;
 using bookstore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +12,7 @@ namespace bookstore.Domain.Services
 
         private readonly IEnderecoRepository _enderecoRepository;
 
-        public EnderecoService(IEnderecoRepository enderecoRepository, IHttpContextAccessor httpContextAccessor) : base(enderecoRepository, httpContextAccessor)
+        public EnderecoService(IEnderecoRepository enderecoRepository, INotificador notificador, IHttpContextAccessor httpContextAccessor) : base(enderecoRepository, notificador, httpContextAccessor)
         {
         }
     }

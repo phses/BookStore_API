@@ -1,4 +1,5 @@
 ﻿using bookstore.Domain.Entities;
+using bookstore.Domain.Interfaces;
 using bookstore.Domain.Interfaces.Repositories;
 using bookstore.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +16,7 @@ namespace bookstore.Domain.Services
 
         private readonly ILivroRepository _LivroRepository;
 
-        public LivroService(ILivroRepository livroRepository, IHttpContextAccessor httpContextAccessor) : base(livroRepository, httpContextAccessor)
+        public LivroService(ILivroRepository livroRepository, INotificador notificador, IHttpContextAccessor httpContextAccessor) : base(livroRepository, notificador, httpContextAccessor)
         {
         }
     }
