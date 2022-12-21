@@ -8,7 +8,7 @@ namespace bookstore.Domain.Entities
         public string Documento { get; set; }
         public TipoFornecedor Tipo { get; set; }
         public string Email { get; set; }
-
+        public TipoFornecedor TipoFornecedor { get; set; }
         //Relacionamentos
         public int EnderecoId { get; set; }
         public Endereco Endereco { get; set; }
