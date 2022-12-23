@@ -4,6 +4,7 @@ using bookstore.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,14 @@ builder.Services.AddSingleton(appSetting);
 
 #endregion
 
+#region JsonEnumConvert
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(
+        options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
+    );
+
+#endregion
 
 #region DbContext
 
