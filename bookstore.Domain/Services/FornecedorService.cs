@@ -17,6 +17,7 @@ namespace bookstore.Domain.Services
                                  INotificador notificador, 
                                  IHttpContextAccessor httpContextAccessor) : base(fornecedorRepository, notificador, httpContextAccessor)
         {
+            _fornecedorRepository = fornecedorRepository;
         }
         public override async Task AdicionarAsync(Fornecedor entity)
         {
