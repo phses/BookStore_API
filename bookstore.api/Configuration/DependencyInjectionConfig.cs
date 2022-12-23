@@ -1,5 +1,7 @@
-﻿using bookstore.Domain.Interfaces.Repositories;
+﻿using bookstore.Domain.Interfaces;
+using bookstore.Domain.Interfaces.Repositories;
 using bookstore.Domain.Interfaces.Services;
+using bookstore.Domain.Notificacoes;
 using bookstore.Domain.Services;
 using bookstore.Infrastructure.Repositories;
 
@@ -27,6 +29,8 @@ namespace bookstore.api.Configuration
             services.AddScoped<ILivroAvaliacaoRepository, LivroAvaliacaoRepository>();
             services.AddScoped<ILivroPedidoRepository, LivroPedidoRepository>();
             #endregion
+
+            services.AddScoped<INotificador, Notificador>();
         }
     }
 }
