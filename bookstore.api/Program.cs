@@ -1,3 +1,4 @@
+using bookstore.api.Configuration;
 using bookstore.Domain.Settings;
 using bookstore.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
+#region DependencyInjection
+DependencyInjectionConfig.ResolveDependencies(builder.Services);
+#endregion
 
 #region AppSettings
 
