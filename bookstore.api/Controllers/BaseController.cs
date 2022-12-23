@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace bookstore.api.Controllers
 {
     [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [Route("[controller]")]
     public class BaseController<TEntity, KRequest, YResponse> : ControllerBase where TEntity : Entity
     {
