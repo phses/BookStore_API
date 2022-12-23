@@ -6,7 +6,6 @@ namespace bookstore.Domain.Entities
     {
         public string Nome { get; set; }
         public string Documento { get; set; }
-        public TipoFornecedor Tipo { get; set; }
         public string Email { get; set; }
         public TipoFornecedor TipoFornecedor { get; set; }
         //Relacionamentos
