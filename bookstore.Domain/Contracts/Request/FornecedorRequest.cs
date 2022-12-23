@@ -24,6 +24,6 @@ namespace bookstore.Domain.Contracts.Request
         [Required(ErrorMessage = "O campo {0} e obrigatorio")]
         public EnderecoRequest Endereco { get; set; }
 
-        public IEnumerable<int> LivrosId { get; set; }
+        //public IEnumerable<int> LivrosId { get; set; }
     }
 }
