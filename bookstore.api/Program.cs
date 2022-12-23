@@ -16,8 +16,17 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 
 #region DependencyInjection
+
 DependencyInjectionConfig.ResolveDependencies(builder.Services);
+
 #endregion
+
+#region Mapper
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+#endregion
+
 
 #region AppSettings
 
