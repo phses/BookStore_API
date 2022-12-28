@@ -59,6 +59,7 @@ namespace bookstore.Domain.Services
         public virtual async Task AdicionarAsync(T entity)
         {
             entity.DataDeCriacao = DateTime.Now;
+            entity.Ativo = true;
             await _repository.AddAsync(entity);
         }
 
