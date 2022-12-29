@@ -1,6 +1,7 @@
 using bookstore.api.Configuration;
 using bookstore.Domain.Settings;
 using bookstore.Infrastructure.Contexts;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
@@ -28,6 +29,14 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 #endregion
 
+#region ApiBehavior
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
+#endregion
 
 #region AppSettings
 
