@@ -36,6 +36,8 @@ namespace bookstore.Domain.Contracts.Request
 
         public string? Imagem { get; set; }
 
+        public string? ImagemUpload { get; set; }
+
         [Required(ErrorMessage = "O campo {0} e obrigatorio")]
         public int FornecedorId { get; set; }
     }
