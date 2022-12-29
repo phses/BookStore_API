@@ -5,6 +5,7 @@ using bookstore.Domain.Contracts.Response;
 using bookstore.Domain.Entities;
 using bookstore.Domain.Interfaces;
 using bookstore.Domain.Interfaces.Services;
+using bookstore.Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bookstore.api.Controllers
@@ -26,26 +27,29 @@ namespace bookstore.api.Controllers
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             string imgNome = Guid.NewGuid() + "_" + request.Imagem;
-            if (!UploadArquivo(request.ImagemUpload, imgNome))
+            if (!UploadUtil.UploadArquivo(request.ImagemUpload, imgNome))
             {
+                NotificarErro("Nao foi possivel fazer o upload da imagem");
                 return CustomResponse();
             }
 
             var entity = _mapper.Map<Livro>(request);
             await _livroService.AdicionarAsync(entity);
-            return CustomResponse(entity);
+            return CustomResponse(entity.Id);
         }
+
 
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
-        public virtual async Task<ActionResult> PutAsync([FromRoute] int id, [FromBody] LivroRequest request)
+        public override async Task<ActionResult> PutAsync([FromRoute] int id, [FromBody] LivroRequest request)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
             if(request.ImagemUpload != null)
             {
                 var imgNome = Guid.NewGuid() + "_" + request.Imagem;
-                if (!UploadArquivo(request.ImagemUpload, imgNome))
+                if (!UploadUtil.UploadArquivo(request.ImagemUpload, imgNome))
                 {
+                    NotificarErro("Nao foi possivel fazer o upload da imagem");
                     return CustomResponse();
                 }
             }
@@ -55,26 +59,5 @@ namespace bookstore.api.Controllers
             return CustomResponse(entity.Id);
         }
 
-        private bool UploadArquivo(string arquivo, string imgNome)
-        {
-            var imgDataByteArray = Convert.FromBase64String(arquivo);
-
-            if(string.IsNullOrEmpty(arquivo))
-            {
-                NotificarErro("Forneca uma imagem para este produto");
-                return false;
-            }
-
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwRoot/Imagens", imgNome);
-
-            if(System.IO.File.Exists(filePath))
-            {
-                NotificarErro("Ja existe um arquivo com este nome");
-                return false;
-            }
-
-            System.IO.File.WriteAllBytes(filePath, imgDataByteArray);
-            return true;
-        }
     }
 }
