@@ -25,7 +25,7 @@ namespace bookstore.api.Controllers
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            string imgNome = new Guid() + "_" + request.Imagem;
+            string imgNome = Guid.NewGuid() + "_" + request.Imagem;
             if (!UploadArquivo(request.ImagemUpload, imgNome))
             {
                 return CustomResponse();
@@ -34,6 +34,25 @@ namespace bookstore.api.Controllers
             var entity = _mapper.Map<Livro>(request);
             await _livroService.AdicionarAsync(entity);
             return CustomResponse(entity);
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(204)]
+        public virtual async Task<ActionResult> PutAsync([FromRoute] int id, [FromBody] LivroRequest request)
+        {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+            if(request.ImagemUpload != null)
+            {
+                var imgNome = Guid.NewGuid() + "_" + request.Imagem;
+                if (!UploadArquivo(request.ImagemUpload, imgNome))
+                {
+                    return CustomResponse();
+                }
+            }
+            var entity = _mapper.Map<Livro>(request);
+            entity.Id = id;
+            await _livroService.AlterarAsync(entity);
+            return CustomResponse(entity.Id);
         }
 
         private bool UploadArquivo(string arquivo, string imgNome)
