@@ -22,6 +22,7 @@ namespace bookstore.Domain.Services
         public override async Task AdicionarAsync(Fornecedor entity)
         {
             if (!ExecutarValidacao(new FornecedorValidation(), entity)) return;
+            entity.Ativo = true;
             entity.DataDeCriacao = DateTime.Now;
             await _fornecedorRepository.AddAsync(entity);
         }
