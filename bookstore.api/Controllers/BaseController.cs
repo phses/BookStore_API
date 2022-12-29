@@ -29,8 +29,8 @@ namespace bookstore.api.Controllers
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
             var entity = _mapper.Map<TEntity>(request);
-            await _service.AdicionarAsync(entity);
-            return CustomResponse(entity);
+            await _service.AdicionarAsync(_mapper.Map<TEntity>(request));
+            return CustomResponse(entity.Id);
         }
 
         [HttpPut("{id}")]
