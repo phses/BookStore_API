@@ -5,7 +5,6 @@ using bookstore.Domain.Interfaces.Services;
 using bookstore.Domain.Notificacoes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Net.WebSockets;
 
 namespace bookstore.api.Controllers
 {
@@ -18,10 +17,11 @@ namespace bookstore.api.Controllers
         private readonly IBaseService<TEntity> _service;
         private readonly INotificador _notificador;
 
-        public BaseController(IMapper mapper, IBaseService<TEntity> service)
+        public BaseController(IMapper mapper, INotificador notificador, IBaseService<TEntity> service)
         {
             _mapper = mapper;
             _service = service;
+            _notificador = notificador;
         }
         [HttpPost]
         [ProducesResponseType(201)]
