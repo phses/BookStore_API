@@ -34,6 +34,7 @@ namespace bookstore.api.Controllers
             }
 
             var entity = _mapper.Map<Livro>(request);
+            entity.Imagem = imgNome;
             await _livroService.AdicionarAsync(entity);
             return CustomResponse(entity.Id);
         }
@@ -44,9 +45,10 @@ namespace bookstore.api.Controllers
         public override async Task<ActionResult> PutAsync([FromRoute] int id, [FromBody] LivroRequest request)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
+            var imgNome = "";
             if(request.ImagemUpload != null)
             {
-                var imgNome = Guid.NewGuid() + "_" + request.Imagem;
+                imgNome = Guid.NewGuid() + "_" + request.Imagem;
                 if (!UploadUtil.UploadArquivo(request.ImagemUpload, imgNome))
                 {
                     NotificarErro("Nao foi possivel fazer o upload da imagem");
@@ -55,6 +57,7 @@ namespace bookstore.api.Controllers
             }
             var entity = _mapper.Map<Livro>(request);
             entity.Id = id;
+            entity.Imagem = imgNome;
             await _livroService.AlterarAsync(entity);
             return CustomResponse(entity.Id);
         }
