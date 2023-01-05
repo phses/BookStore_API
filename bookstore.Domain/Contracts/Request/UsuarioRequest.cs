@@ -18,6 +18,8 @@ namespace bookstore.Domain.Contracts.Request
         [DataType(DataType.Password)]
         public string Senha { get; set; }
 
+        public EnderecoRequest Endereco { get; set; }
+
         public string? Imagem { get; set; }
 
         public string? ImagemUpload { get; set; }
