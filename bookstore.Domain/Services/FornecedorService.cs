@@ -26,5 +26,12 @@ namespace bookstore.Domain.Services
             entity.DataDeCriacao = DateTime.Now;
             await _fornecedorRepository.AddAsync(entity);
         }
+        public async Task<Fornecedor> ObterFornecedorEnderecoAsync(int id)
+        {
+            var entity = await _fornecedorRepository.FindFornecedorEnderecoAsync(x => x.Id == id && x.Ativo);
+            if (entity == null)
+                Notificar($"Nenhum dado encontrado para o Id {id}");
+            return entity;
+        }
     }
 }
