@@ -17,13 +17,5 @@ namespace bookstore.api.Controllers
             _mapper = mapper;
             _fornecedorService = fornecedorService;
         }
-
-        [HttpGet("endereco/{id:int}")]
-        public async Task<IActionResult> GetFornecedorEnderecoAsync([FromRoute] int id)
-        {
-            var entity = await _fornecedorService.ObterFornecedorEnderecoAsync(id);
-            var response = _mapper.Map<FornecedorResponse>(entity);
-            return Ok(response);
-        }
     }
 }
