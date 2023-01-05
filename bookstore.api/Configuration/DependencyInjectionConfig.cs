@@ -18,6 +18,7 @@ namespace bookstore.api.Configuration
             services.AddScoped<ILivroService, LivroService>();
             services.AddScoped<IPedidoService, PedidoService>();
             services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddScoped<IPerfilService, PerfilService>();
             #endregion
             #region Repository
             services.AddScoped<IAvaliacaoRepository, AvaliacaoRepository>();
@@ -28,6 +29,7 @@ namespace bookstore.api.Configuration
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddScoped<ILivroAvaliacaoRepository, LivroAvaliacaoRepository>();
             services.AddScoped<ILivroPedidoRepository, LivroPedidoRepository>();
+            services.AddScoped<IPerfilRepository, PerfilRepository>();
             #endregion
 
             services.AddScoped<INotificador, Notificador>();

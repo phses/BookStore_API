@@ -16,6 +16,7 @@ namespace bookstore.api.Profiles
             CreateMap<LivroRequest, Livro>().ReverseMap();
             CreateMap<PedidoRequest, Pedido>().ReverseMap();
             CreateMap<UsuarioRequest, Usuario>().ReverseMap();
+            CreateMap<PerfilRequest, Perfil>().ReverseMap();
             #endregion
 
             #region EntityToResponse
@@ -25,6 +26,7 @@ namespace bookstore.api.Profiles
             CreateMap<LivroResponse, Livro>().ReverseMap();
             CreateMap<PedidoResponse, Pedido>().ReverseMap();
             CreateMap<UsuarioResponse, Usuario>().ReverseMap();
+            CreateMap<PerfilResponse, Perfil>().ReverseMap();
             #endregion
         }
 
