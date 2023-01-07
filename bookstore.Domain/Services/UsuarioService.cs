@@ -9,9 +9,25 @@ namespace bookstore.Domain.Services
     public class UsuarioService : BaseService<Usuario>, IUsuarioService {
 
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IAvaliacaoRepository _avaliacaoRepository;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, INotificador notificador, IHttpContextAccessor httpContextAccessor) : base(usuarioRepository, notificador, httpContextAccessor)
+        public UsuarioService(IUsuarioRepository usuarioRepository, INotificador notificador, IHttpContextAccessor httpContextAccessor, IAvaliacaoRepository avaliacaoRepository) : base(usuarioRepository, notificador, httpContextAccessor)
         {
+            _usuarioRepository = usuarioRepository;
+            _avaliacaoRepository = avaliacaoRepository;
+        }
+
+        public async Task AdicionarAvalicaoAsync(Avaliacao entity)
+        {
+            var find = await _avaliacaoRepository.FindAsync(entity.Id);
+            if(find != null)
+            {
+                Notificar("Ja existe uma avaliacao com o id informado");
+                return;
+            }
+            entity.DataDeCriacao = DateTime.Now;
+            entity.Ativo = true;
+            await _avaliacaoRepository.AddAsync(entity);
         }
     }
 }

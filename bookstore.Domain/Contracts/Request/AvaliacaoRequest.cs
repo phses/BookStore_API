@@ -10,6 +10,7 @@ namespace bookstore.Domain.Contracts.Request
     public class AvaliacaoRequest
     {
         [Required(ErrorMessage = "A nota da avaliacao e necessaria")]
+        [Range(0, 5, ErrorMessage ="A nota precisa estar entre 0 e 5")]
         public int Nota { get; set; }
 
         [Required(ErrorMessage = "O Id do usuario que faz a avaliacao e necessario")]

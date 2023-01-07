@@ -86,5 +86,16 @@ namespace bookstore.api.Controllers
             var response = _mapper.Map<UsuarioResponse>(entity);
             return Ok(response);
         }
+
+        [HttpPost("avaliacao")]
+        [ProducesResponseType(200)]
+        public virtual async Task<ActionResult> PostAvaliacaoAsync([FromBody] AvaliacaoRequest request)
+        {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+            var entity = _mapper.Map<Avaliacao>(request);
+            await _usuarioService.AdicionarAvalicaoAsync(entity);
+            return CustomResponse();
+        }
     }
 }
