@@ -1,4 +1,5 @@
-﻿using bookstore.Domain.Entities;
+﻿using bookstore.Domain.Contracts.Request;
+using bookstore.Domain.Entities;
 using bookstore.Domain.Interfaces;
 using bookstore.Domain.Interfaces.Repositories;
 using bookstore.Domain.Interfaces.Services;
@@ -28,6 +29,19 @@ namespace bookstore.Domain.Services
             entity.DataDeCriacao = DateTime.Now;
             entity.Ativo = true;
             await _avaliacaoRepository.AddAsync(entity);
+        }
+
+        public async Task AlterarNotaAvaliacaoAsync(int nota, int id)
+        {
+            var entity = await _avaliacaoRepository.FindAsync(id);
+            if(entity == null)
+            {
+                Notificar("Nao existe uma avaliacao com o id informado");
+                return;
+            }
+            entity.DataDeAlteracao = DateTime.Now;
+            entity.Nota = nota;
+            await _avaliacaoRepository.EditAsync(entity);
         }
     }
 }

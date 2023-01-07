@@ -89,13 +89,23 @@ namespace bookstore.api.Controllers
 
         [HttpPost("avaliacao")]
         [ProducesResponseType(200)]
-        public virtual async Task<ActionResult> PostAvaliacaoAsync([FromBody] AvaliacaoRequest request)
+        public async Task<ActionResult> PostAvaliacaoAsync([FromBody] AvaliacaoRequest request)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var entity = _mapper.Map<Avaliacao>(request);
             await _usuarioService.AdicionarAvalicaoAsync(entity);
             return CustomResponse();
+        }
+
+        [HttpPatch("avaliacao/{id:int}")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult> PatchAvaliacaoAsync([FromBody] NotaRequest request, [FromRoute] int id)
+        {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+            await _usuarioService.AlterarNotaAvaliacaoAsync(request.Nota, id);
+            return Ok();
         }
     }
 }
