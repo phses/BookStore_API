@@ -4,17 +4,16 @@ using bookstore.Domain.Contracts.Response;
 using bookstore.Domain.Entities;
 using bookstore.Domain.Interfaces;
 using bookstore.Domain.Interfaces.Services;
-using bookstore.Domain.Services;
 using bookstore.Domain.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bookstore.api.Controllers
 {
-    public class UsuarioController : BaseController<Usuario, UsuarioRequest, UsuarioResponse>
+    public class UsuarioController : BaseController
     {
         private readonly IMapper _mapper;
         private readonly IUsuarioService _usuarioService;
-        public UsuarioController(IMapper mapper, INotificador notificador, IUsuarioService UsuarioService) : base(mapper, notificador, UsuarioService)
+        public UsuarioController(IMapper mapper, INotificador notificador, IUsuarioService UsuarioService) : base(notificador)
         {
             _mapper = mapper;
             _usuarioService = UsuarioService;
@@ -22,7 +21,7 @@ namespace bookstore.api.Controllers
 
         [HttpPost]
         [ProducesResponseType(201)]
-        public override async Task<ActionResult> PostAsync([FromBody] UsuarioRequest request)
+        public async Task<ActionResult> PostAsync([FromBody] UsuarioRequest request)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
@@ -42,7 +41,7 @@ namespace bookstore.api.Controllers
 
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
-        public override async Task<ActionResult> PutAsync([FromRoute] int id, [FromBody] UsuarioRequest request)
+        public async Task<ActionResult> PutAsync([FromRoute] int id, [FromBody] UsuarioRequest request)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
             var imgNome = "";
@@ -60,6 +59,32 @@ namespace bookstore.api.Controllers
             entity.ImagemPerfil = imgNome;
             await _usuarioService.AlterarAsync(entity);
             return CustomResponse(entity.Id);
+        }
+
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(204)]
+        public async Task<ActionResult> DeleteAsync([FromRoute] int id)
+        {
+            await _usuarioService.DeletarAsync(id);
+            return CustomResponse();
+        }
+
+        [HttpGet()]
+        [ProducesResponseType(200)]
+        public virtual async Task<ActionResult<List<UsuarioResponse>>> GetAsync()
+        {
+            var entities = await _usuarioService.ObterTodosAsync();
+            var response = _mapper.Map<List<UsuarioResponse>>(entities);
+            return Ok(response);
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(200)]
+        public virtual async Task<ActionResult<UsuarioResponse>> GetByIdAsync([FromRoute] int id)
+        {
+            var entity = await _usuarioService.ObterPorIdAsync(id);
+            var response = _mapper.Map<UsuarioResponse>(entity);
+            return Ok(response);
         }
     }
 }
