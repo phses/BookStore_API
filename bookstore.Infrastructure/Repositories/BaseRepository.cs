@@ -30,6 +30,11 @@ namespace bookstore.Infrastructure.Repositories
         {
             return await _context.Set<T>().ToListAsync();
         }
+        public async Task<IEnumerable<T>> ListPaginationAsync(int skip, int take)
+        {
+            return await _context.Set<T>().Skip(skip).Take(take).ToListAsync();
+        }
+
         public async Task<List<T>> ListAsync(Expression<Func<T, bool>> expression)
         {
             return await _context.Set<T>().Where(expression).ToListAsync();

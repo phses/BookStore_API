@@ -10,6 +10,7 @@ namespace bookstore.Domain.Interfaces.Repositories
         Task<T> FindAsync(Expression<Func<T, bool>> expression);
         Task<T> FindAsNoTrackingAsync(Expression<Func<T, bool>> expression);
         Task<List<T>> ListAsync();
+        Task<IEnumerable<T>> ListPaginationAsync(int skip, int take);
         Task<List<T>> ListAsync(Expression<Func<T, bool>> expression);
         Task AddAsync(T item);
         Task RemoveAsync(T item);
