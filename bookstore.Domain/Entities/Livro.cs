@@ -16,6 +16,6 @@
         public Fornecedor Fornecedor { get; set; }
 
         public ICollection<LivroPedido> LivroPedidos { get; set; }
-        public ICollection<LivroAvaliacao> LivroAvaliacoes { get; set; }
+        public ICollection<Avaliacao> Avaliacoes { get; set; }
     }
 }

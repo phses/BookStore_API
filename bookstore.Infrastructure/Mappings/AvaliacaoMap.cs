@@ -9,6 +9,7 @@ namespace bookstore.Infrastructure.Mappings
         public void Configure(EntityTypeBuilder<Avaliacao> builder)
         {
             builder.HasOne(a => a.Usuario).WithMany(u => u.Avaliacoes).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(a => a.Livro).WithMany(u => u.Avaliacoes).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

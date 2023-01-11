@@ -17,12 +17,10 @@ namespace bookstore.Infrastructure.Contexts
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Perfil> Perfis { get; set; }
         public DbSet<LivroPedido> LivroPedidos { get; set; }
-        public DbSet<LivroAvaliacao> LivroAvaliacoes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<LivroPedido>(new LivroPedidoMap().Configure);
-            modelBuilder.Entity<LivroAvaliacao>(new LivroAvaliacaoMap().Configure);
             modelBuilder.Entity<Avaliacao>(new AvaliacaoMap().Configure);
             modelBuilder.Entity<Fornecedor>(new FornecedorMap().Configure);
             modelBuilder.Entity<Livro>(new LivroMap().Configure);

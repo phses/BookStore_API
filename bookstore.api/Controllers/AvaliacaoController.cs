@@ -28,7 +28,7 @@ namespace bookstore.api.Controllers
 
             var entity = _mapper.Map<Avaliacao>(request);
             await _avaliacaoService.AdicionarAvalicaoAsync(entity);
-            return CustomResponse();
+            return CustomResponse(entity.Id);
         }
 
         [HttpPatch("avaliacao/{id:int}")]

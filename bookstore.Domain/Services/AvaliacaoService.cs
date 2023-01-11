@@ -12,8 +12,11 @@ namespace bookstore.Domain.Services
 
         private readonly IAvaliacaoRepository _avaliacaoRepository;
 
-        public AvaliacaoService(IAvaliacaoRepository avaliacaoRepository, INotificador notificador, IHttpContextAccessor httpContextAccessor) : base(avaliacaoRepository, notificador, httpContextAccessor)
+        public AvaliacaoService(IAvaliacaoRepository avaliacaoRepository,
+                                INotificador notificador, 
+                                IHttpContextAccessor httpContextAccessor) : base(avaliacaoRepository, notificador, httpContextAccessor)
         {
+            _avaliacaoRepository = avaliacaoRepository;
         }
 
         public async Task AdicionarAvalicaoAsync(Avaliacao entity)
@@ -27,6 +30,7 @@ namespace bookstore.Domain.Services
             entity.DataDeCriacao = DateTime.Now;
             entity.Ativo = true;
             await _avaliacaoRepository.AddAsync(entity);
+            
         }
 
         public async Task AlterarNotaAvaliacaoAsync(int nota, int id)
