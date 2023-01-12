@@ -17,5 +17,13 @@ namespace bookstore.Domain.Services
             _usuarioRepository = usuarioRepository;
             _avaliacaoRepository = avaliacaoRepository;
         }
+
+        public override async Task<Usuario> ObterPorIdAsync(int id)
+        {
+            var entity = await _usuarioRepository.FindUsuarioEnderecoAsync(x => x.Id == id && x.Ativo);
+            if (entity == null)
+                Notificar($"Nenhum dado encontrado para o Id {id}");
+            return entity;
+        }
     }
 }
