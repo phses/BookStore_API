@@ -18,6 +18,7 @@ namespace bookstore.Domain.Services
 
         public LivroService(ILivroRepository livroRepository, INotificador notificador, IHttpContextAccessor httpContextAccessor) : base(livroRepository, notificador, httpContextAccessor)
         {
+            _livroRepository = livroRepository;
         }
 
         public async Task<IEnumerable<Livro>> ObterPaginacaoAsync(int skip, int take)
