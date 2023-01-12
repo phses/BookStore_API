@@ -24,7 +24,7 @@ namespace bookstore.api.Controllers
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
             var entity = _mapper.Map<Fornecedor>(request);
-            await _fornecedorService.AdicionarAsync(_mapper.Map<Fornecedor>(request));
+            await _fornecedorService.AdicionarAsync(entity);
             return CustomResponse(entity.Id);
         }
 
