@@ -6,12 +6,13 @@ namespace bookstore.Domain.Utils
         
         public static bool UploadArquivo(string arquivo, string imgNome)
         {
-            var imgDataByteArray = Convert.FromBase64String(arquivo);
 
             if (string.IsNullOrEmpty(arquivo))
             {
                 return false;
             }
+
+            var imgDataByteArray = Convert.FromBase64String(arquivo);
 
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwRoot/Imagens", imgNome);
 

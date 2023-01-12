@@ -86,6 +86,5 @@ namespace bookstore.api.Controllers
             var response = _mapper.Map<UsuarioResponse>(entity);
             return Ok(response);
         }
-
     }
 }
