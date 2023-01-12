@@ -20,7 +20,7 @@ namespace bookstore.api.Controllers
             _avaliacaoService = avaliacaoService;
         }
 
-        [HttpPost("avaliacao")]
+        [HttpPost("")]
         [ProducesResponseType(200)]
         public async Task<ActionResult> PostAvaliacaoAsync([FromBody] AvaliacaoRequest request)
         {
@@ -31,7 +31,7 @@ namespace bookstore.api.Controllers
             return CustomResponse(entity.Id);
         }
 
-        [HttpPatch("avaliacao/{id:int}")]
+        [HttpPatch("{id:int}")]
         [ProducesResponseType(200)]
         public async Task<ActionResult> PatchAvaliacaoAsync([FromBody] NotaRequest request, [FromRoute] int id)
         {
