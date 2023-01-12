@@ -15,7 +15,7 @@ namespace bookstore.Domain.Contracts.Request
         public string Documento { get; set; }
 
         [Required(ErrorMessage = "O campo {0} e obrigatorio")]
-        public TipoFornecedor Tipo { get; set; }
+        public TipoFornecedor TipoFornecedor { get; set; }
 
         [Required(ErrorMessage = "O campo {0} e obrigatorio")]
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
