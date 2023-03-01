@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using bookstore.Domain.Contracts.Request;
+using bookstore.Domain.Contracts.Response;
 using bookstore.Domain.Entities;
 using bookstore.Domain.Interfaces;
 using bookstore.Domain.Interfaces.Services;
@@ -39,6 +40,35 @@ namespace bookstore.api.Controllers
 
             await _avaliacaoService.AlterarNotaAvaliacaoAsync(request.Nota, id);
             return Ok();
+        }
+
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult> DeleteAvaliacaAsync([FromRoute] int id)
+        {
+            await _avaliacaoService.DeletarAsync(id);
+            return CustomResponse();
+        }
+
+        [HttpGet()]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<IEnumerable<AvaliacaoResponse>>> GetAsync()
+        {
+            var entitie = await _avaliacaoService.ObterTodosAsync();
+            var response = _mapper.Map<IEnumerable<Avaliacao>, IEnumerable<AvaliacaoResponse>>(entitie);
+            if(!response.Any())
+            {
+                return NoContent();
+            }
+            return Ok(response);
+        }
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(200)]
+        public async Task<ActionResult<IEnumerable<AvaliacaoResponse>>> GetByIdAsync([FromRoute] int id)
+        {
+            var entitie = await _avaliacaoService.ObterPorIdAsync(id);
+            var response = _mapper.Map<Avaliacao, AvaliacaoResponse>(entitie);
+            return Ok(response);
         }
     }
 }
