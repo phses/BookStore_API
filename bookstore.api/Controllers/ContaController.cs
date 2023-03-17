@@ -28,9 +28,10 @@ namespace bookstore.api.Controllers
             return Ok();
         }
         [HttpPatch("email")]
-        public async Task<ActionResult> ConfirmarEmail([FromRoute] Guid tokenEmail)
+        public async Task<ActionResult> ConfirmarEmail([FromQuery] Guid tokenEmail)
         {
-            throw new NotImplementedException();
+            await _usuarioService.ConfirmarEmailAsync(tokenEmail);
+            return CustomResponse();
         }
         [HttpPost("login")]
         public async Task<ActionResult> AuthenticarAsync([FromBody] AuthenticacaoRequest request)

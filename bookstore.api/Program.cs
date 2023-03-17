@@ -27,6 +27,13 @@ DependencyInjectionConfig.ResolveDependencies(builder.Services);
 
 #endregion
 
+#region EmailConfig
+var emailConfig = builder.Configuration
+            .GetSection("Smtp")
+            .Get<EmailSettings>();
+builder.Services.AddSingleton(emailConfig);
+#endregion
+
 #region Mapper
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
