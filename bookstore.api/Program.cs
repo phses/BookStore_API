@@ -1,10 +1,14 @@
 using bookstore.api.Configuration;
 using bookstore.Domain.Settings;
 using bookstore.Infrastructure.Contexts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,6 +55,25 @@ builder.Services
     .AddJsonOptions(
         options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
     );
+
+#endregion
+
+#region AuthenticationJWT 
+
+var secretKey = Encoding.ASCII.GetBytes("FW18N7OyCGZNlbI/j73gIMXpXDhbJPVHNq72/pSw");
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
+{
+    option.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+        ValidateIssuer = false,
+        ValidateAudience = false
+
+    };
+});
 
 #endregion
 

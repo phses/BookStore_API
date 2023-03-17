@@ -3,6 +3,7 @@ using bookstore.Domain.Entities;
 using bookstore.Domain.Interfaces;
 using bookstore.Domain.Interfaces.Repositories;
 using bookstore.Domain.Interfaces.Services;
+using bookstore.Domain.Shered;
 using Microsoft.AspNetCore.Http;
 
 namespace bookstore.Domain.Services
@@ -16,6 +17,15 @@ namespace bookstore.Domain.Services
         {
             _usuarioRepository = usuarioRepository;
             _avaliacaoRepository = avaliacaoRepository;
+        }
+
+        public async Task CriarUsuarioAsync(Usuario usuario)
+        {
+            usuario.Senha = Cryptography.Encrypt(usuario.Senha);
+            usuario.DataDeCriacao = DateTime.Now;
+
+            //Enviar email
+            await _usuarioRepository.AddAsync(usuario);
         }
 
         public override async Task<Usuario> ObterPorIdAsync(int id)

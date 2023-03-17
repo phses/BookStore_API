@@ -14,11 +14,11 @@ namespace bookstore.Infrastructure.Repositories
         {
             _context = context;
         }
-        public async Task<T> FindAsync(int id)
+        public virtual async Task<T> FindAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
-        public async Task<T> FindAsync(Expression<Func<T, bool>> expression)
+        public virtual async Task<T> FindAsync(Expression<Func<T, bool>> expression)
         {
             return await _context.Set<T>().FirstOrDefaultAsync(expression);
         }

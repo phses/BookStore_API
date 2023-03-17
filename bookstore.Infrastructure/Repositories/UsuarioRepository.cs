@@ -20,5 +20,13 @@ namespace bookstore.Infrastructure.Repositories
                 .Include(c => c.Endereco)
                 .FirstOrDefaultAsync(expression);
         }
+        public override async Task<Usuario> FindAsync(int id)
+        {
+            return await _context.Set<Usuario>().AsNoTracking().Include(u => u.Perfil).FirstOrDefaultAsync(u => u.Id == id);
+        }
+        public override async Task<Usuario> FindAsync(Expression<Func<Usuario, bool>> expression)
+        {
+            return await _context.Set<Usuario>().Include(u => u.Perfil).FirstOrDefaultAsync(expression);
+        }
     }
 }
